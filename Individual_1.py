@@ -16,73 +16,45 @@ class Triangle:
         self.angle_c = 0
         self._semi_perimeter = 0
 
+    # Установка сторон
     def set_sides(self, a, b, c):
-        """
-        Установка сторон
-        :param a: сторона a
-        :param b: сторона b
-        :param c: сторона c
-        :return:
-        """
         self.side_a = a
         self.side_b = b
         self.side_c = c
         self._semi_perimeter = self.semi_perimeter()  # вычисляем полупериметр зарание, так как везде используем
 
+    # Установка углов
     def set_angles(self, a, b, c):
-        """
-        Установка углов
-        :param a: угол a
-        :param b: угол b
-        :param c: угол c
-        :return:
-        """
         self.angle_a = a
         self.angle_b = b
         self.angle_c = c
 
+    # Считывание исходных данных
     def read(self):
-        """
-        Считывание исходных данных
-        :return:
-        """
         sides = list(map(int, input('Введите стороны треугольника: ').split()))
         self.set_sides(*sides)
         # В иделале нужно проверять что сумма углов равна 180
         angles = list(map(int, input('Введите углы треугольника: ').split()))
         self.set_angles(*angles)
 
+    # Расчет периметра
     def perimeter(self):
-        """
-        Расчет периметра
-        :return:
-        """
         return self.side_a + self.side_b + self.side_c
 
+    # Расчет полуперимтера
     def semi_perimeter(self):
-        """
-        Расчет полуперимтера
-        :return:
-        """
         return self.perimeter() / 2
 
+    # Расчет площади по формуле Герона
     def square(self):
-        """
-        Расчет площади по формуле Герона
-        :return:
-        """
         return (self._semi_perimeter
                 * (self._semi_perimeter - self.side_a)
                 * (self._semi_perimeter - self.side_b)
                 * (self._semi_perimeter - self.side_c)
                 ) ** 0.5
 
+    # Вычисление высоты опущенную на сторону
     def height(self, side_name):
-        """
-        Вычисление высоты опущенную на сторону side_name
-        :param side_name: сторона (a, b, c)
-        :return:
-        """
         numerator = 2 * (self.square())
         denominator = 1
         if side_name == 'a':
@@ -93,35 +65,21 @@ class Triangle:
             denominator = self.side_c
         return numerator / denominator
 
+    # Проверка существования треугольника
     def is_real(self):
-        """
-        Проверка существования треугольника
-        :return:
-        """
         return self.side_a + self.side_b > self.side_c \
             and self.side_a + self.side_c > self.side_b \
             and self.side_b + self.side_c > self.side_a
 
 
+    # Определяем вид треугольника
     def is_equilateral(self):
-        """
-        Определяем равносторонний ли треугольник
-        :return:
-        """
         return self.side_a == self.side_b == self.side_c
 
     def is_isosceles(self):
-        """
-        Определяем равнобедренный ли треугольник
-        :return:
-        """
         return self.side_a == self.side_b or self.side_a == self.side_c or self.side_b == self.side_c
 
     def is_rectangular(self):
-        """
-        Определяем по теореме Пифагора прямоугольный ли треугольник
-        :return:
-        """
         # Сначала нужно найти гипотинузу, она является большей стороной
         if self.side_a > self.side_b:
             if self.side_a > self.side_c:
