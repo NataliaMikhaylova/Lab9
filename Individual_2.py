@@ -32,11 +32,8 @@ class Triad:
     def set_c(self, value):
         self._c = value
 
+    # Считывание исходных данных
     def read(self):
-        """
-        Считывание исходных данных
-        :return:
-        """
         for i in range(1, 4):
             line = int(input('Введите число {0}: '.format(i)))
             if i == 1:
@@ -55,11 +52,8 @@ class Triangle(Triad):
         super(Triangle, self).__init__()
         self.angles = Triad()
 
+    # Расчет улов треугольника
     def calc_angles(self):
-        """
-        Расчет улов треугольника
-        :return:
-        """
         self.angles.set_b(math.degrees(math.acos((self.get_a() ** 2 + self.get_c() ** 2 - self.get_b() ** 2)
                                        / (2 * self.get_a() * self.get_c())))
                           )
@@ -70,11 +64,8 @@ class Triangle(Triad):
                                        / (2 * self.get_b() * self.get_c())))
                           )
 
+    # Расчет площади по двум сторонам и углу между ними
     def square(self):
-        """
-        Расчет площади по двум сторонам и углу между ними
-        :return:
-        """
         self.calc_angles()
         return (self.get_b()*self.get_c()*math.sin(math.radians(self.angles.get_a()))) / 2
 
