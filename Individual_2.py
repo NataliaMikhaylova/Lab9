@@ -9,10 +9,10 @@ import math
 
 
 class Triad:
-    def __init__(self):
-        self._a = 0
-        self._b = 0
-        self._c = 0
+    def __init__(self, a=0, b=0, c=0):
+        self._a = a
+        self._b = b
+        self._c = c
 
     def get_a(self):
         return self._a
@@ -48,8 +48,8 @@ class Triad:
 
 
 class Triangle(Triad):
-    def __init__(self):
-        super(Triangle, self).__init__()
+    def __init__(self, a, b, c):
+        super(Triangle, self).__init__(a, b, c)
         self.angles = Triad()
 
     # Расчет улов треугольника
@@ -71,8 +71,11 @@ class Triangle(Triad):
 
 
 if __name__ == '__main__':
-    triangle = Triangle()
-    triangle.read()
+    sides = []
+    for i in range(1, 4):
+        line = int(input('Введите число {0}: '.format(i)))
+        sides.append(line)
+    triangle = Triangle(*sides)
     triangle.calc_angles()
     print('alpha={0:.3f}, beta={1:.3f}, gamma={2:.3f}'.format(triangle.angles.get_a(),
                                                               triangle.angles.get_b(),
